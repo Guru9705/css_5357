@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+  </head>
+  <style>
+    #card {
+      width: 35%;
+      height: 200px;
+      border: 1px solid black;
+      text-align: center;
+      margin: 20px;
+    }
+  </style>
+  <body>
+    <div id="container"></div>
+  </body>
+</html>
+<script>
+  fetch("https://reqres.in/api/users")
+    .then((response) => response.json())
+    .then((data) => get_data(data));
+
+  function get_data(data) {
+    console.log("h", data.data);
+    data.data.map((d) => {
+      var c = document.createElement("div");
+      var f = document.createElement("div");
+      var e = document.createElement("div");
+      e.textContent = d.email;
+      var im = document.createElement("img");
+      im.src = d.avatar;
+      f.textContent = d.first_name;
+      var l = document.createElement("div");
+      l.textContent = d.last_name;
+      c.setAttribute("id", "card");
+      c.append(f, l, im, e);
+      document.getElementById("container").append(c);
+    });
+  }
+</script>
